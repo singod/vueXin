@@ -21,10 +21,11 @@
 
 </template>
 <script>
-    import Vue from 'vue'
     import Icon from'./icon.vue'
-    Vue.component('g-icon',Icon)
     export default {
+        components:{
+            Icon
+        },
         computed:{
             disabledStyle(){
                 if(this.disabled){
