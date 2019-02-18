@@ -7,6 +7,7 @@
 </template>
 
 <script>
+    //不知道这样能不能上传到分支
     export default {
         name: "gRow",
         props:{
