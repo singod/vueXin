@@ -1,5 +1,5 @@
 <template>
-<div class="row" :style="{marginLeft:-gutter/2+'px',marginRight:-gutter/2+'px'}"
+<div class="row" :style="rowStyle"
 
 >
 <slot></slot>
@@ -7,16 +7,12 @@
 </template>
 
 <script>
-    //不知道这样能不能上传到分支
     export default {
         name: "gRow",
         props:{
             gutter:{
                 type:[Number,String]
             }
-        },
-        created(){
-
         },
         mounted(){
             this.$children.forEach(vm=>{
@@ -25,7 +21,18 @@
             })
             console.log(this.$children);
         },
+        computed:{
+            rowStyle(){
+                return {
+                    marginLeft:-this.gutter/2+'px',
+                    marginRight:-this.gutter/2+'px'
+                }
+            }
+        }
     }
+
+
+
     // var div =  document.createElement('div')     created
     // var childDiv = document.createElement('div')
     // div.appendChild(childDiv)
