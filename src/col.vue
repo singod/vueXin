@@ -1,14 +1,9 @@
 <template>
 <div class="col" :class="[colClasses]"
      :style="colStyle"
-
 >
-    <div  style="border:2px solid green;
-          height: 100px;
-          ">
-        <slot></slot>
-    </div>
-
+        <slot>
+        </slot>
 </div>
 </template>
 

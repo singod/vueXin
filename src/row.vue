@@ -1,6 +1,6 @@
 <template>
 <div class="row" :style="rowStyle"
-
+        :class="rowClass"
 >
 <slot></slot>
 </div>
@@ -12,6 +12,12 @@
         props:{
             gutter:{
                 type:[Number,String]
+            },
+            arrange:{
+                type: String,
+                validator(val){
+                  return   ['right','left','center'].includes(val)
+                }
             }
         },
         mounted(){
@@ -27,7 +33,12 @@
                     marginLeft:-this.gutter/2+'px',
                     marginRight:-this.gutter/2+'px'
                 }
+            },
+            rowClass(){
+                let {arrange} = this
+                return [arrange && `row-${arrange}`]
             }
+
         }
     }
 
@@ -43,5 +54,14 @@
 <style scoped lang="scss">
 .row{
     display: flex;
+    &-left{
+        justify-content: flex-start;
+    }
+    &-center{
+        justify-content: center;
+    }
+    &-right{
+        justify-content: flex-end;
+    }
 }
 </style>

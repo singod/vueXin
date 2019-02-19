@@ -1,5 +1,5 @@
 <template>
-<div class="wrapper">
+<div class="wrapper" >
     <input type="text"
            :value="value"
            :disabled="disabled"

@@ -40,11 +40,64 @@
 
     </style>
     <style>
+        .logo-wrapper{
+            padding: 10px;
+        }
+        img{
+            max-width: 100%;
+        }
+            .demoBox{
+                min-height: 50px;
+                background-color: grey;
+                border: 1px solid red;
+            }
+        .main{
 
+        }
     </style>
 </head>
 <body>
 <div id="app">
+
+   <div>
+       <g-row class="topbar">
+           <g-col class="demoBox" span="7">
+               <g-row arrange="center">
+                   <g-col class="logo-wrapper">
+                       <img class="logo"  src="https://img.alicdn.com/tfs/TB1_uT8a5ERMeJjSspiXXbZLFXa-143-59.png" alt="">
+                   </g-col>
+               </g-row>
+
+           </g-col>
+           <g-col class="demoBox" span="17"></g-col>
+       </g-row>
+       <g-row class="logo-and-search">
+           <g-col class="demoBox" span="4"></g-col>
+           <g-col  class="demoBox" span="14">
+               <g-row class="topbar">
+                   <g-col  span="6" >1</g-col>
+                   <g-col  span="6">2</g-col>
+                   <g-col  span="6">3</g-col>
+                   <g-col  span="6">4</g-col>
+               </g-row>
+
+           </g-col>
+           <g-col class="demoBox" span="6"></g-col>
+       </g-row>
+       <g-row class="main">
+           <g-col class="demoBox" span="4"></g-col>
+           <g-col  class="demoBox" span="14">
+               <g-row class="topbar" arrange="center">
+                   <g-col span="1">1</g-col>
+                   <g-col span="1">2</g-col>
+                   <g-col span="1">3</g-col>
+                   <g-col span="1">4</g-col>
+               </g-row>
+
+           </g-col>
+           <g-col class="demoBox" span="6"></g-col>
+       </g-row>
+   </div>
   <div style="border:1px solid black">
       <g-row gutter="20">
           <g-col span="12">1</g-col>
@@ -69,7 +122,7 @@
           <g-col span="12" offset="1">2</g-col>
       </g-row>
   </div>
-    <hr>
+
     <div class="box">
         <g-button icon="set"
                   icon-position="left"
