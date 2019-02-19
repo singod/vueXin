@@ -26,10 +26,10 @@
             console.log(this.$children);
         },
     }
-    // var div =  document.createElement('div')
+    // var div =  document.createElement('div')     created
     // var childDiv = document.createElement('div')
     // div.appendChild(childDiv)
-    // document.body.appendChild(div)
+    // document.body.appendChild(div)               mounted
 
 </script>
 

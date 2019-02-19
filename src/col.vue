@@ -1,11 +1,14 @@
 <template>
 <div class="col" :class="[span && `col-${span}`,offset&&`offset-${offset}`]"
      :style="{paddingLeft:gutter/2+'px',paddingRight:gutter/2+'px'}"
+
 >
-    <div style="border:2px solid green">
-{{this.haha}}
-    </div>
+    <div  style="border:2px solid green;
+          height: 100px;
+          ">
         <slot></slot>
+    </div>
+
 </div>
 </template>
 
@@ -23,7 +26,6 @@
         data(){
             return {
                 gutter:0,
-                haha:''
             }
         },
 
@@ -33,9 +35,6 @@
 
 <style scoped lang="scss">
     .col{
-        height: 100px;
-        width: 50%;
-
         $class-prefix:col-;
         $class-offset:offset-;
         @for $n from 1 through 24 {
