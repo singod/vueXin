@@ -61,7 +61,11 @@
 
    <div>
        <g-row class="topbar">
-           <g-col class="demoBox" span="7">
+           <g-col class="demoBox" span="7"
+                  :phone="{span:12}"
+                  :pad="{span:18}"
+                  :pc="{span:3}"
+           >
                <g-row arrange="center">
                    <g-col class="logo-wrapper">
                        <img class="logo"  src="https://img.alicdn.com/tfs/TB1_uT8a5ERMeJjSspiXXbZLFXa-143-59.png" alt="">
@@ -69,59 +73,64 @@
                </g-row>
 
            </g-col>
-           <g-col class="demoBox" span="17"></g-col>
-       </g-row>
-       <g-row class="logo-and-search">
-           <g-col class="demoBox" span="4"></g-col>
-           <g-col  class="demoBox" span="14">
-               <g-row class="topbar">
-                   <g-col  span="6" >1</g-col>
-                   <g-col  span="6">2</g-col>
-                   <g-col  span="6">3</g-col>
-                   <g-col  span="6">4</g-col>
-               </g-row>
+           <g-col class="demoBox" span="17"
+                  :phone="{span:12}"
+                  :pad="{span:6}"
+                  :pc="{span:21}"
 
-           </g-col>
-           <g-col class="demoBox" span="6"></g-col>
+           ></g-col>
        </g-row>
-       <g-row class="main">
-           <g-col class="demoBox" span="4"></g-col>
-           <g-col  class="demoBox" span="14">
-               <g-row class="topbar" arrange="center">
-                   <g-col span="1">1</g-col>
-                   <g-col span="1">2</g-col>
-                   <g-col span="1">3</g-col>
-                   <g-col span="1">4</g-col>
-               </g-row>
+       <!--<g-row class="logo-and-search">-->
+           <!--<g-col class="demoBox" span="4" :phone="{span:8}"></g-col>-->
+           <!--<g-col  class="demoBox" span="14" :phone="{span:8}">-->
+               <!--<g-row class="topbar">-->
+                   <!--<g-col  span="6" >1</g-col>-->
+                   <!--<g-col  span="6">2</g-col>-->
+                   <!--<g-col  span="6">3</g-col>-->
+                   <!--<g-col  span="6">4</g-col>-->
+               <!--</g-row>-->
 
-           </g-col>
-           <g-col class="demoBox" span="6"></g-col>
-       </g-row>
+           <!--</g-col>-->
+           <!--<g-col class="demoBox" span="6" :phone="{span:8}"></g-col>-->
+       <!--</g-row>-->
+       <!--<g-row class="main">-->
+           <!--<g-col class="demoBox" span="4"></g-col>-->
+           <!--<g-col  class="demoBox" span="14">-->
+               <!--<g-row class="topbar" arrange="center">-->
+                   <!--<g-col span="1">1</g-col>-->
+                   <!--<g-col span="1">2</g-col>-->
+                   <!--<g-col span="1">3</g-col>-->
+                   <!--<g-col span="1">4</g-col>-->
+               <!--</g-row>-->
+
+           <!--</g-col>-->
+           <!--<g-col class="demoBox" span="6"></g-col>-->
+       <!--</g-row>-->
    </div>
-  <div style="border:1px solid black">
-      <g-row gutter="20">
-          <g-col span="12">1</g-col>
-          <g-col span="12">2</g-col>
+  <!--<div style="border:1px solid black">-->
+      <!--<g-row gutter="20" >-->
+          <!--<g-col span="12" :phone="{span:6}">1</g-col>-->
+          <!--<g-col span="12" :phone="{span:18}">2</g-col>-->
 
-      </g-row>
-      <g-row>
-          <g-col span="1" offset="1">1</g-col>
-          <g-col span="4" >2</g-col>
-          <g-col span="6" >3</g-col>
-          <g-col span="12" >4</g-col>
-      </g-row>
+      <!--</g-row>-->
+      <!--<g-row>-->
+          <!--<g-col span="1" offset="1">1</g-col>-->
+          <!--<g-col span="4" >2</g-col>-->
+          <!--<g-col span="6" >3</g-col>-->
+          <!--<g-col span="12" >4</g-col>-->
+      <!--</g-row>-->
 
-      <g-row gutter="20">
-          <g-col span="4">1</g-col>
-          <g-col span="6">2</g-col>
-          <g-col span="8">3</g-col>
-          <g-col span="6">4</g-col>
-      </g-row>
-      <g-row>
-          <g-col span="12" offset="1">1</g-col>
-          <g-col span="12" offset="1">2</g-col>
-      </g-row>
-  </div>
+      <!--<g-row gutter="20">-->
+          <!--<g-col span="4">1</g-col>-->
+          <!--<g-col span="6">2</g-col>-->
+          <!--<g-col span="8">3</g-col>-->
+          <!--<g-col span="6">4</g-col>-->
+      <!--</g-row>-->
+      <!--<g-row>-->
+          <!--<g-col span="12" offset="1">1</g-col>-->
+          <!--<g-col span="12" offset="1">2</g-col>-->
+      <!--</g-row>-->
+  <!--</div>-->
 
     <div class="box">
         <g-button icon="set"

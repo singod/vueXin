@@ -25,7 +25,6 @@
                 vm.gutter = this.gutter
                 vm.haha = 'haha'
             })
-            console.log(this.$children);
         },
         computed:{
             rowStyle(){
