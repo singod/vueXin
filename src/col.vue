@@ -39,14 +39,25 @@
         },
         computed:{
             colClasses(){
+
                 let {span,offset,pad,np,pc,wp} = this
+                let createClass = (obj,str = '')=>{
+                    if(!obj) return 
+                    let array = []
+                    if(obj.span){
+                        array.push(`col-${str}${obj.span}`)
+                    }
+                    if(obj.offset){
+                        array.push(`offset-${str}${obj.span}`)
+                    }
+                    return array
+                }
                 return [
-                    span && `col-${span}`,
-                    offset && `offset-${offset}`,
-                    ...[pad && `col-iPad-${pad.span}`],
-                    ...[np && `col-narrowPc-${np.span}`],
-                    ...[pc && `col-pc-${pc.span}`],
-                    ...[wp && `col-widePc-${wp.span}`],
+                    createClass({span,offset}),
+                    createClass(pad,'iPad-'),
+                    createClass(np,'narrowPc-'),
+                    createClass(pc,'pc-'),
+                    createClass(wp,'widePc-'),
             ]
             },
             colStyle(){
