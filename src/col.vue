@@ -27,10 +27,10 @@
             offset:{
                 type:[Number,String]
             },
-            phone:{type:Object, validator},
             pad:{type:Object, validator},
-            narrowPc:{type:Object, validator},
-            pc:{type:Object, validator}
+            np:{type:Object, validator},
+            pc:{type:Object, validator},
+            wp:{type:Object, validator},
         },
         data(){
             return {
@@ -39,14 +39,14 @@
         },
         computed:{
             colClasses(){
-                let {span,offset,phone,pad,narrowPc,pc} = this
+                let {span,offset,pad,np,pc,wp} = this
                 return [
                     span && `col-${span}`,
                     offset && `offset-${offset}`,
-                    ...[phone && `col-phone-${phone.span}`],
                     ...[pad && `col-iPad-${pad.span}`],
-                    ...[narrowPc && `col-narrowPc-${narrowPc.span}`],
+                    ...[np && `col-narrowPc-${np.span}`],
                     ...[pc && `col-pc-${pc.span}`],
+                    ...[wp && `col-widePc-${wp.span}`],
             ]
             },
             colStyle(){
@@ -76,20 +76,6 @@
             }
         }
 
-            @media (max-width: 576px) {
-                    $class-prefix:col-phone-;
-                    $class-offset:offset-phone-;
-                    @for $n from 1 through 24 {
-                            &.#{$class-prefix}#{$n} {
-                                    width: ($n/24) *100%
-                            }
-                    }
-                    @for $n from 1 through 24 {
-                            &.#{$class-offset}#{$n} {
-                                    margin-left: ($n/24) *100%
-                            }
-                    }
-            }
             @media (min-width: 577px)and (max-width: 768px) {
                     $class-prefix:col-iPad-;
                     $class-offset:offset-iPad-;
