@@ -76,7 +76,7 @@
             }
         }
 
-            @media (min-width: 577px)and (max-width: 768px) {
+            @media (min-width: 577px){
                     $class-prefix:col-iPad-;
                     $class-offset:offset-iPad-;
                     @for $n from 1 through 24 {
@@ -90,7 +90,7 @@
                             }
                     }
             }
-            @media (min-width: 769px)and (max-width: 992px) {
+            @media (min-width: 769px){
                     $class-prefix:col-narrowPc-;
                     $class-offset:offset-narrowPc-;
                     @for $n from 1 through 24 {
@@ -104,7 +104,7 @@
                             }
                     }
             }
-            @media (min-width: 993px)and (max-width: 1200px) {
+            @media (min-width: 993px) {
                     $class-prefix:col-pc-;
                     $class-offset:offset-pc-;
                     @for $n from 1 through 24 {
