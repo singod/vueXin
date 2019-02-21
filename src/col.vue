@@ -42,13 +42,13 @@
 
                 let {span,offset,pad,np,pc,wp} = this
                 let createClass = (obj,str = '')=>{
-                    if(!obj) return 
+                    if(!obj) return
                     let array = []
                     if(obj.span){
                         array.push(`col-${str}${obj.span}`)
                     }
                     if(obj.offset){
-                        array.push(`offset-${str}${obj.span}`)
+                        array.push(`offset-${str}${obj.offset}`)
                     }
                     return array
                 }
