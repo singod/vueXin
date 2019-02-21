@@ -11,6 +11,9 @@ import Footer from './footer'
 import Slider from './slider'
 import Content from './content'
 
+import plugin from './plugin.js'
+
+
 Vue.component('g-button', Button)
 Vue.component('g-icon', Icon)
 Vue.component('g-button-group', ButtonGroup)
@@ -22,11 +25,11 @@ Vue.component('g-header', Header)
 Vue.component('g-footer', Footer)
 Vue.component('g-slider', Slider)
 Vue.component('g-content', Content)
+Vue.use(plugin)
 
 
 new Vue({
     el: '#app',
-
     data:{
         loading1:false,
         loading2:false,
@@ -46,7 +49,12 @@ new Vue({
         focus(e){
             console.log(e)
         },
-    }
+        showMsg(){
+            this.$toast('叫你关机你不关机')
+        }
+    },
+
+
 })
 
 

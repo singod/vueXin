@@ -24,9 +24,6 @@
 
     import Icon from'./icon.vue'
     export default {
-        mounted(){
-         // console.log(this.$el.querySelector('use'))
-        },
         components:{
             'g-icon':Icon
         },
