@@ -10,8 +10,8 @@ import Header from './header'
 import Footer from './footer'
 import Slider from './slider'
 import Content from './content'
-
 import plugin from './plugin.js'
+
 
 
 Vue.component('g-button', Button)
@@ -30,32 +30,42 @@ Vue.use(plugin)
 
 new Vue({
     el: '#app',
-    data:{
-        loading1:false,
-        loading2:false,
-        loading3:false,
-        value:'v-model'
+    data: {
+        loading1: false,
+        loading2: false,
+        loading3: false,
+        value: 'v-model'
     },
-    methods:{
-        inputChange(e){
+    methods: {
+        inputChange(e) {
             console.log(e)
         },
-        Change(e){
+        Change(e) {
             console.log(e)
         },
-        blur(e){
+        blur(e) {
             console.log(e)
         },
-        focus(e){
+        focus(e) {
             console.log(e)
         },
-        showMsg(){
-            this.$toast('叫你关机你不关机')
-        }
+        showMsg() {
+            this.$toast('<p style="color: red">你xx，叫你关机你不关机</p>',{
+                closeButton:{
+                    text:'cas',
+                    callback(){
+                        console.log('鲁迅在书桌上刻了一个草字')
+                    }
+                },
+                enableHTML:true
+            })
+        },
+
     },
 
 
 })
+
 
 
 
