@@ -50,37 +50,22 @@ new Vue({
             console.log(e)
         },
         showMsg1() {
-            this.$toast('<p style="color: red">你xx，叫你关机你不关机</p>',{
-                closeButton:{
-                    text:'cas',
-                    callback(){
-                        console.log('鲁迅在书桌上刻了一个草字')
-                    }
-                },
+            this.$toast('<p style="color: red">鲁迅在书桌上刻了一个草字</p>',{
+
                 enableHTML:true,
                 position:'top'
             })
         },
         showMsg2() {
-            this.$toast('<p style="color: red">你xx，叫你关机你不关机</p>',{
-                closeButton:{
-                    text:'cas',
-                    callback(){
-                        console.log('鲁迅在书桌上刻了一个草字')
-                    }
-                },
+            this.$toast('<p style="color: red">鲁迅在书桌上刻了一个草字</p>',{
+
                 enableHTML:true,
                 position:'center'
             })
         },
         showMsg3() {
-            this.$toast('<p style="color: red">你xx，叫你关机你不关机</p>',{
-                closeButton:{
-                    text:'cas',
-                    callback(){
-                        console.log('鲁迅在书桌上刻了一个草字')
-                    }
-                },
+            this.$toast('<p style="color: red">鲁迅在书桌上刻了一个草字</p>',{
+
                 enableHTML:true,
                 position:'bottom'
             })

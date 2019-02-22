@@ -17,12 +17,15 @@
         name: "toast",
         props: {
             autoClosed: {
-                type: Boolean,
-                default: true
-            },
-            autoClosedDelay: {
-                type: Number,
-                default: 1
+                type: [Boolean,Number],
+                default: 1,
+                validator(val){
+                    if(val===false || typeof val ==='number'){
+                        return true
+                    }else{
+                        return false
+                    }
+                }
             },
             closeButton: {
                 type: Object,
@@ -35,6 +38,7 @@
                     }
                 },
                 validator(val){
+                    if(!val.text)return console.error('请输入text')
                         if(val.text.length<=5)return true
                         return console.error('不能输入超过5个字')
                 }
@@ -70,7 +74,7 @@
                    if (this.autoClosed) {
                        setTimeout(() => {
                            this.close()
-                       }, this.autoClosedDelay * 1000)
+                       }, this.autoClosed * 1000)
                    }
                },
                 close() {
