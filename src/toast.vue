@@ -1,5 +1,5 @@
 <template>
-<div class="toast" ref="toast">
+<div class="toast" ref="toast" :class="toastClass">
     <div class="message">
         <slot v-if="!enableHTML"></slot>
         <div  v-else v-html="$slots.default[0]"></div>
@@ -22,7 +22,7 @@
             },
             autoClosedDelay: {
                 type: Number,
-                default: 1
+                default: 1123
             },
             closeButton: {
                 type: Object,
@@ -55,6 +55,11 @@
                 this.exeAutoClosed()
                 this.updateStyles()
             },
+        computed:{
+            toastClass(){
+                return `position-${this.position}`
+            }
+        },
             methods: {
                 updateStyles(){
                     this.$nextTick(()=>{
@@ -91,8 +96,6 @@
 .toast{
     border: 1px solid $toast-bg;
     position: fixed;
-    left: 50%;
-    transform: translateX(-50%);
     font-size: $font-size;
     line-height: 1.8;
     min-height: $toast-min-height;
@@ -116,7 +119,21 @@
         margin-left: 15px;
         margin-right: 5px;
         font-size: 20px;
-
+    }
+    &.position-top{
+        top:0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    &.position-bottom{
+        top:100%;
+        transform: translateY(-120%) translateX(-50%);
+        left: 50%;
+    }
+    &.position-center{
+        top:50%;
+        transform: translateY(-50%)translateX(-50%);
+        left: 50%;
     }
 }
 </style>

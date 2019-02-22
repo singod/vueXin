@@ -57,7 +57,8 @@ new Vue({
                         console.log('鲁迅在书桌上刻了一个草字')
                     }
                 },
-                enableHTML:true
+                enableHTML:true,
+                position:'bottom'
             })
         },
 
