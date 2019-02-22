@@ -1,46 +1,69 @@
 <template>
-<div class="toast" ref="toast" :class="toastClass">
+<div class="toast" ref="toast" :class="[toastClass,typeSelect]">
+    <div class="toast-icon" v-if="type">
+        <g-icon :name="type" style="width: 2em;height: 2em">
+
+        </g-icon>
+    </div>
     <div class="message">
         <slot v-if="!enableHTML"></slot>
         <div  v-else v-html="$slots.default[0]"></div>
     </div>
     <p class="divided" ref="divided"></p>
     <span v-if="closeButton" class="close" @click="onClickClosed">
-        {{closeButton.text}}
+        <div v-if="closeButton.text &&!closeButton.closeIcon">
+            {{closeButton.text}}
+        </div>
+         <g-icon  class="close-icon" v-if="closeButton.closeIcon"
+                  :name="closeButton.closeIcon"
+                  style="width: 1em;height: 1em;"
+                  :style="typeStyle"
+         >
+
+        </g-icon>
     </span>
 </div>
 </template>
 
 <script>
-
+    import Icon from './icon'
     export default {
         name: "toast",
+        components:{
+            'g-icon':Icon
+        },
         props: {
+            type:{
+              type:String,
+              validator(val){
+                  return ['success','warn','error'].indexOf(val)>-1
+              }
+            },
             autoClosed: {
                 type: [Boolean,Number],
-                default: 1,
+                default: 2,
                 validator(val){
-                    if(val===false || typeof val ==='number'){
-                        return true
-                    }else{
-                        return false
-                    }
+                    return val === false || typeof val === 'number'
                 }
             },
             closeButton: {
                 type: Object,
                 default: () => {
                     return {
-                        text: 'x',
+                        text: null,
+                        closeIcon:'wrong',
                         callback: () => {
-                            console.log('已关闭')
+
                         }
                     }
                 },
                 validator(val){
-                    if(!val.text)return console.error('请输入text')
-                        if(val.text.length<=5)return true
-                        return console.error('不能输入超过5个字')
+                        let judge =['wrong','correct'].indexOf(val.closeIcon) >-1
+                        if(!val.text &&!val.closeIcon)return console.error('至少设置一项')
+                        if(val.text && val.text.length>5)return console.error('不能输入超过5个字')
+                        if(judge) return true
+                        return false
+
                 }
             },
             enableHTML:{
@@ -60,6 +83,21 @@
                 this.updateStyles()
             },
         computed:{
+            typeSelect(){
+                if(!this.type)return
+                return `type-${this.type}`
+            },
+            typeStyle(){
+              if(!this.type)return
+              if(this.type ==='success'){
+                  return 'fill:#67c23a;'
+              }else if(this.type ==='warn'){
+                  return 'fill:#e6a23c;'
+              }
+              else if(this.type ==='error'){
+                  return 'fill:#f56c6c;'
+              }
+            },
             toastClass(){
                 return `position-${this.position}`
             }
@@ -98,7 +136,7 @@
     $font-size:14px;
     $toast-min-height:40px;
     $toast-bg:#e4e0e0;
-    $animation-duration:.9s;
+    $animation-duration:.6s;
     @keyframes slideUp {
         0%{
             transform: translateY(0%) translateX(-50%);
@@ -137,7 +175,7 @@
     background: $toast-bg;
     padding: 0 25px;
     padding-right: 5px;
-
+    color: #999999;
     .message{
         padding: 6px 0;
     }
@@ -148,8 +186,11 @@
     }
     .close{
         margin-left: 15px;
-        margin-right: 5px;
+        margin-right: 10px;
         font-size: 20px;
+        .close-icon{
+           display: flex;
+        }
     }
     &.position-top{
         top:0;
@@ -172,6 +213,28 @@
         transform: translateY(-50%)translateX(-50%);
         left: 50%;
         animation: fade-in $animation-duration;
+    }
+    &.type-success{
+        background-color: #e1f3d8;
+        border: #e1f3d8;
+        box-shadow: 0 0 3px #1fab06;
+        color: #67c23a;
+    }
+    &.type-error{
+        background-color: #fef0f0;
+        border: #fef0f0;
+        color:#f56c6c;
+        box-shadow: 0 0 3px #d81e06;
+    }
+    &.type-warn{
+        background-color: #faecd8;
+        border: #faecd8;
+        color:#e6a23c;
+        box-shadow: 0 0 3px #bda109;
+    }
+    > .toast-icon{
+        display: flex;
+        margin-right: 10px;
     }
 }
 </style>

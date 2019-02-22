@@ -50,24 +50,26 @@ new Vue({
             console.log(e)
         },
         showMsg1() {
-            this.$toast('<p style="color: red">鲁迅在书桌上刻了一个草字</p>',{
-
-                enableHTML:true,
-                position:'top'
+            this.$toast('这是一条成功信息',{
+                type:'success',
+                position:'top',
             })
         },
         showMsg2() {
-            this.$toast('<p style="color: red">鲁迅在书桌上刻了一个草字</p>',{
-
-                enableHTML:true,
+            this.$toast('这是一警告信息',{
+                type:'warn',
                 position:'center'
             })
         },
         showMsg3() {
-            this.$toast('<p style="color: red">鲁迅在书桌上刻了一个草字</p>',{
-
-                enableHTML:true,
+            this.$toast('这是一条错误信息',{
+                type:'error',
                 position:'bottom'
+            })
+        },
+        showMsg4() {
+            this.$toast('默认',{
+                position:'top'
             })
         },
 
