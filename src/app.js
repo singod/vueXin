@@ -12,8 +12,6 @@ import Slider from './slider'
 import Content from './content'
 import plugin from './plugin.js'
 
-
-
 Vue.component('g-button', Button)
 Vue.component('g-icon', Icon)
 Vue.component('g-button-group', ButtonGroup)
