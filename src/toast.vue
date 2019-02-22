@@ -22,7 +22,7 @@
             },
             autoClosedDelay: {
                 type: Number,
-                default: 1123
+                default: 1
             },
             closeButton: {
                 type: Object,
@@ -127,7 +127,7 @@
     }
     &.position-bottom{
         top:100%;
-        transform: translateY(-120%) translateX(-50%);
+transform: translateY(-120%) translateX(-50%);
         left: 50%;
     }
     &.position-center{
