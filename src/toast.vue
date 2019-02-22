@@ -42,6 +42,13 @@
             enableHTML:{
                 type:Boolean,
                 default:false
+            },
+            position:{
+                type:String,
+                default:'top',
+                validator(val){
+                      return   ['top','bottom','center'].indexOf(val)>-1
+                }
             }
         },
             mounted() {
