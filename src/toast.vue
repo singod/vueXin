@@ -49,7 +49,7 @@
                 validator(val){
                       return   ['top','bottom','center'].indexOf(val)>-1
                 }
-            }
+            },
         },
             mounted() {
                 this.exeAutoClosed()
@@ -75,6 +75,7 @@
                },
                 close() {
                     this.$el.remove()
+                    this.$emit('close')
                     this.$destroy()
                 },
                 onClickClosed(){
@@ -93,7 +94,33 @@
     $font-size:14px;
     $toast-min-height:40px;
     $toast-bg:#e4e0e0;
+    $animation-duration:.9s;
+    @keyframes slideUp {
+        0%{
+            transform: translateY(0%) translateX(-50%);
+        }
+        100%{
+            transform: translateY(-100%) translateX(-50%);
+        }
+    }
+    @keyframes slideDown {
+        0%{
+            transform: translateY(-100%) translateX(-50%);
+        }
+        100%{
+            transform: translateY(0%) translateX(-50%);
+        }
+    }
+    @keyframes fade-in {
+        0%{
+           opacity: 0;
+        }
+        100%{
+            opacity: 1;
+        }
+    }
 .toast{
+    animation: fade-in 1s ;
     border: 1px solid $toast-bg;
     position: fixed;
     font-size: $font-size;
@@ -124,16 +151,23 @@
         top:0;
         left: 50%;
         transform: translateX(-50%);
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        animation: slideDown $animation-duration;
     }
     &.position-bottom{
         top:100%;
-transform: translateY(-120%) translateX(-50%);
+        transform: translateY(-100%) translateX(-50%);
         left: 50%;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        animation: slideUp $animation-duration;
     }
     &.position-center{
         top:50%;
         transform: translateY(-50%)translateX(-50%);
         left: 50%;
+        animation: fade-in $animation-duration;
     }
 }
 </style>
