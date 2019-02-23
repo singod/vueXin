@@ -77,10 +77,10 @@
 
 
 
-   <g-tabs>
+   <!--<g-tabs>-->
    <!--<g-tabs :selected.sync="selectedTab">-->
-   <!--<g-tabs :selected="selectedTab"-->
-           <!--@update:selected="selectedTab= $event">-->
+   <g-tabs :selected="selectedTab"
+           @update:selected="yyy">
        <g-tabs-header>
            <template slot="actions">
                     <button>卧槽</button>
@@ -91,7 +91,7 @@
            <g-tabs-item name="2">
                <p>新闻</p>
            </g-tabs-item>
-           <g-tabs-item name="3">
+           <g-tabs-item name="3" disabled>
                <p>科技</p>
            </g-tabs-item>
        </g-tabs-header>

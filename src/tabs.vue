@@ -6,12 +6,13 @@
 </template>
 
 <script>
+    import Vue from 'vue'
     export default {
         name: "g-tabs",
         props:{
             selected:{
                 type:String,
-                // required:true
+                required:true
             },
             direction:{
                 type: String,
@@ -21,8 +22,28 @@
                 }
             }
         },
+        data(){
+          return {
+              eventBus:new Vue()
+          }
+        },
+        computed:{
+            classes(){
+                return {
+                    active:this.active
+                }
+            }
+        },
+        provide(){
+          return {
+              eventBus:this.eventBus
+          }
+        },
         created(){
-            // this.$emit('update:selected','xxx')
+            this.$emit('update:selected', '这是emit出来的')
+        },
+        mounted(){
+          this.eventBus.$emit('update:selected',this.selected)
         }
     }
 </script>

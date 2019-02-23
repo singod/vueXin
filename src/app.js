@@ -42,9 +42,13 @@ new Vue({
         loading1: false,
         loading2: false,
         loading3: false,
-        value: 'v-model'
+        value: 'v-model',
+        selectedTab: '1'
     },
     methods: {
+        yyy(val){
+          console.log(val)
+        },
         inputChange(e) {
             console.log(e)
         },
