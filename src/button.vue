@@ -24,6 +24,7 @@
 
     import Icon from'./icon.vue'
     export default {
+        name:'g-button',
         components:{
             'g-icon':Icon
         },
