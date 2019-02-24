@@ -1,5 +1,5 @@
 <template>
-    <div class="tabs-header">
+    <div class="tabs-header" :class="positionStyle">
             <slot></slot>
     </div>
 </template>
@@ -13,11 +13,11 @@
                 type:String,
                 required:true
             },
-            direction:{
+            position:{
                 type: String,
-                default:'horizontal',
+                default:'top',
                 validator(val){
-                    return ['horizontal','vertical'].indexOf(val)>-1
+                    return ['top','left','right','bottom'].indexOf(val)>-1
                 }
             }
         },
@@ -27,6 +27,9 @@
           }
         },
         computed:{
+            positionStyle(){
+                return `postion-${this.position}`
+            },
             classes(){
                 return {
                     active:this.active
@@ -42,15 +45,22 @@
             this.$emit('update:selected', '这是emit出来的')
         },
         mounted(){
+
+            if(this.$children.length===0){
+                throw new Error('tabs的子组件应该是tabs-head和tabs-panel，但你没有子组件')
+            }
             this.$children.forEach(vm=>{
                 if(vm.$options.name ==='g-tabs-header'){
                     vm.$children.forEach(child=>{
                         if(child.name===this.selected && child.$options.name==='g-tabs-item'){
+
                             this.eventBus.$emit('update:selected',this.selected,child)
+
                         }
                     })
                 }
             })
+
         }
     }
 </script>

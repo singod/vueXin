@@ -13,10 +13,9 @@
         name: "g-tabs-header",
         inject: ['eventBus'],
         mounted () {
-           this.eventBus.$on('update:selected',(item,vm)=>{
-                  console.log(vm)
+            if(!this.eventBus)return
+            this.eventBus.$on('update:selected',(item,vm)=>{
                   let {top,width,height,left} = vm.$el.getBoundingClientRect()
-                  console.log(top,width,height,left)
                   this.$refs.line.style.width = `${width}px`
                   this.$refs.line.style.transform = `translateX(${left}px)`
 

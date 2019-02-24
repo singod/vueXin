@@ -20,6 +20,7 @@
             }
         },
         created(){
+            if(!this.eventBus)return
             this.eventBus.$on('update:selected',(name)=>{
                 this.active = name === this.name;
             })
