@@ -1,6 +1,5 @@
 <template>
     <div class="tabs-header">
-
             <slot></slot>
     </div>
 </template>
@@ -43,7 +42,15 @@
             this.$emit('update:selected', '这是emit出来的')
         },
         mounted(){
-          this.eventBus.$emit('update:selected',this.selected)
+            this.$children.forEach(vm=>{
+                if(vm.$options.name ==='g-tabs-header'){
+                    vm.$children.forEach(child=>{
+                        if(child.name===this.selected && child.$options.name==='g-tabs-item'){
+                            this.eventBus.$emit('update:selected',this.selected,child)
+                        }
+                    })
+                }
+            })
         }
     }
 </script>

@@ -83,16 +83,22 @@
            @update:selected="yyy">
        <g-tabs-header>
            <template slot="actions">
-                    <button>卧槽</button>
+                    <g-button>卧槽</g-button>
            </template>
                 <g-tabs-item name="1">
-                    <p>游戏</p>
+                    <p>游戏王的男人</p>
                 </g-tabs-item>
            <g-tabs-item name="2">
                <p>新闻</p>
            </g-tabs-item>
            <g-tabs-item name="3" disabled>
                <p>科技</p>
+           </g-tabs-item>
+           <g-tabs-item name="4">
+               <p>趣事</p>
+           </g-tabs-item>
+           <g-tabs-item name="5">
+               <p>军事</p>
            </g-tabs-item>
        </g-tabs-header>
        <g-tabs-body>
@@ -105,7 +111,12 @@
            <g-tabs-panel name="3">
                科技
            </g-tabs-panel >
-
+           <g-tabs-panel name="4">
+               趣事
+           </g-tabs-panel >
+           <g-tabs-panel name="5">
+               军事
+           </g-tabs-panel >
        </g-tabs-body>
    </g-tabs>
 
