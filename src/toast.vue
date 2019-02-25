@@ -111,12 +111,8 @@
                     exeAutoClosed(){
 
                      if (this.autoClosed) {
-                            setTimeout(() => {
-                            this.leaveActive()
                             setTimeout(()=>{
                                  this.close()
-                            },600)
-
                        }, this.autoClosed * 1000)
                    }
                },
@@ -133,12 +129,14 @@
                         }
                 },
                 close() {
-                    this.$el.remove()
-                    this.$emit('close')
-                    this.$destroy()
+                      this.leaveActive()
+                      setTimeout(()=>{
+                          this.$el.remove()
+                          this.$emit('close')
+                          this.$destroy()
+                      },600)
                 },
                 onClickClosed(){
-                    console.log(this.closeButton)
                     this.close()
                     if(this.closeButton && typeof this.closeButton.callback === 'function'){
                         this.closeButton.callback()
