@@ -1,71 +1,57 @@
 <template>
-    <div class="tabs-item" @click="onClick" :class="classes"
-         :data-name="name"
-         :disabled="disabled">
-        <slot></slot>
-    </div>
+    <transition  name="bounce">
+<div v-if="parseInt(active)===parseInt(name)">
+    <slot></slot>
+</div>
+    </transition>
 </template>
+
 <script>
     export default {
-        name: "g-tabs-item",
-        inject:['eventBus'],
-        data(){
-          return {
-              active:false
-          }
-        },
-        computed:{
-          classes(){
-              return {
-                  active:this.active
-              }
-          }
-        },
+        name: "xTabs-item",
         props:{
-            disabled:{
-                type:Boolean,
-                default:false
+            item:{
+                type:String,
+                required: true
             },
             name:{
-              type: Number|String,
-                required:true
+                type: String|Number,
+                required: true
+            },
+            disabled:{
+                type:Boolean,
+                default: false
+            }
+        },
+        data(){
+            return {
+               active:null
             }
         },
         created(){
-            if(!this.eventBus)return
-            this.eventBus.$on('update:selected',(name)=>{
-               this.active = name === this.name;
-            })
-            this.$emit('click',this)
-        },
-        methods:{
-            onClick(){
-                this.eventBus.$emit('update:selected', this.name,this)
-            }
+
+             this.$parent._data.headerClass.push(this.item)
+             this.$parent._data.disabledClass[this.name] = this.disabled
+
         }
     }
 </script>
 
 <style scoped lang="scss">
-       $blue:#1296db;
-       .tabs-item{
-            flex-shrink: 0;
-            padding: 0 2em;
-            cursor: pointer;
-            height: 100%;
-            display: flex;
-            align-items: center;
-           &:hover{
-               color:$blue;
-               font-weight: bold;
-           }
-           &.active{
-               color:$blue;
-               font-weight: bold;
-           }
-           &[disabled]{
-               pointer-events: none;
-               opacity: 0.6;
-           }
-       }
+    $animation-duration:0.3s;
+    .bounce-enter-active {
+        animation: bounce-in $animation-duration;
+    }
+    .bounce-leave-active {
+        animation: bounce-in $animation-duration reverse;
+    }
+    @keyframes bounce-in {
+        0% {
+            transform: scale(0);
+        }
+
+        100% {
+            transform: scale(1);
+        }
+    }
 </style>
