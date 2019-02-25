@@ -69,20 +69,13 @@
 <body>
 <div id="app">
 
-
-        <g-button @click="showMsg1">top</g-button>
-        <g-button @click="showMsg2">center</g-button>
-        <g-button @click="showMsg3">bottom</g-button>
-       <g-button @click="showMsg4">默认</g-button>
-
+        <!--<g-button @click="showMsg1">top</g-button>-->
+        <!--<g-button @click="showMsg2">center</g-button>-->
+        <!--<g-button @click="showMsg3">bottom</g-button>-->
+       <!--<g-button @click="showMsg4">默认</g-button>-->
 
 
-   <!--<g-tabs>-->
-   <!--<g-tabs :selected.sync="selectedTab">-->
-
-
-
-    <g-tabs :selected="selectedTab">
+    <g-tabs :selected="selectedTab" >
         <g-tabs-item item="经济xxx" name="1">经济xxxxxxx</g-tabs-item>
         <g-tabs-item item="体育xx" name="2" disabled>体育xxxxxxx</g-tabs-item>
         <g-tabs-item item="民生x" name="3" disabled>民生xxxxxxx</g-tabs-item>
@@ -90,11 +83,27 @@
         <g-tabs-item item="政治" name="5" >民生xxxxxxx</g-tabs-item>
         <g-tabs-item item="军事" name="6">游戏xxxxxxx</g-tabs-item>
 
-        <template slot="actions">
+        <div slot="actions">
             <g-button>卧槽</g-button>
-        </template>
+        </div>
     </g-tabs>
-            <!--<g-layout style="height: 600px;">-->
+
+    <!--<div style="overflow: hidden">-->
+        <!--<g-popover>-->
+            <!--<template slot="content">-->
+                <!--<div>popover内容</div>-->
+            <!--</template>-->
+            <!--<button>点我</button>-->
+        <!--</g-popover>-->
+        <!--<g-popover>-->
+            <!--<template slot="content">-->
+                <!--<div>popover内容</div>-->
+            <!--</template>-->
+            <!--<button>点我</button>-->
+        <!--</g-popover>-->
+    <!--</div>-->
+
+    <!--<g-layout style="height: 600px;">-->
                 <!--<g-header >header</g-header>-->
 
                     <!--<g-layout>-->
