@@ -1,12 +1,14 @@
 <template>
-    <div class="popover" @click="onClick" ref="popover">
-        <div ref="contentWrapper" class="content-wrapper"
-             :class="{[`position-${position}`]:true}"
-             v-if="visible">
-            <div class="contentSlot">
-                <slot name="content"></slot>
+    <div class="popover" ref="popover">
+        <transition name="fade">
+            <div ref="contentWrapper" class="content-wrapper"
+                 :class="{[`position-${position}`]:true}"
+                 v-if="visible">
+                <div class="contentSlot">
+                    <slot name="content"></slot>
+                </div>
             </div>
-        </div>
+        </transition>
         <span ref="trigger" style="display: inline-block">
             <slot></slot>
         </span>
@@ -19,6 +21,31 @@
         data () {
             return {visible: false}
         },
+        mounted(){
+            if(this.trigger==='click'){
+                this.$refs.popover.addEventListener('click',this.onClick)
+
+            }else if(this.trigger==='hover'){
+                this.$refs.popover.addEventListener('mouseenter',this.open)
+                this.$refs.popover.addEventListener('mouseleave',this.close)
+            }else{
+                this.$refs.popover.addEventListener('mousedown',this.open)
+                this.$refs.popover.addEventListener('mouseup',this.close)
+            }
+
+        },
+        destroyed(){
+            if(this.trigger==='click'){
+                this.$refs.popover.removeEventListener('click',this.onClick)
+
+            }else if(this.trigger==='hover'){
+                this.$refs.popover.removeEventListener('mouseenter',this.open)
+                this.$refs.popover.removeEventListener('mouseleave',this.close)
+            }else{
+                this.$refs.popover.removeEventListener('mousedown',this.open)
+                this.$refs.popover.removeEventListener('mouseup',this.close)
+            }
+        },
             props:{
                     position:{
                         type:String,
@@ -26,8 +53,35 @@
                         validator(val){
                             return ['top','bottom','left','right'].indexOf(val)>-1
                         }
-                    }
+                    },
+                trigger:{
+                        type: String,
+                        default: 'click',
+                        validator(val){
+                            return ['click','hover','focus'].indexOf(val)>-1
+                        }
+                }
             },
+        computed:{
+          openEvent(){
+                if(this.trigger ==='click'){
+                    return 'click'
+                }else if(this.trigger ==='hover'){
+                    return 'mouseenter'
+                }else{
+                    return 'focus'
+                }
+          },
+            closeEvent(){
+                if(this.trigger ==='click'){
+                    return 'click'
+                }else if(this.trigger ==='hover'){
+                    return 'mouseleave'
+                }else{
+                    return 'focus'
+                }
+            }
+        },
         methods: {
             contentPosition(){
                 const {contentWrapper,trigger}=this.$refs
@@ -67,11 +121,11 @@
             },
             eventHandler(e){
                 if(!this.isconWrapepr(e) && this.$refs.popover &&!(this.$refs.popover===e.target || this.$refs.popover.contains(e.target))) {
-                    console.log('已关闭')
                     this.close()
                 }
             },
             open(){
+                this.visible = true
                 this.$nextTick(() => {
                     this.contentPosition() //搞定内容弹出的位置
                     this.listenToDocument()//添加document的事件监听，在外部点击可以关闭气泡
