@@ -180,6 +180,7 @@
             display: block;
             border: 10px solid transparent;
             border-top-color: black;
+            border-bottom: none;
             width: 0;
             height: 0;
             position: absolute;
@@ -199,6 +200,7 @@
             display: block;
             border: 10px solid transparent;
             border-top-color: black;
+            border-bottom: none;
             width: 0;
             height: 0;
             position: absolute;
@@ -216,18 +218,19 @@
         &::before,&::after{
             content: '';
             display: block;
-            transform: rotate(-90deg) translateY(497%);
+            transform: rotate(-90deg) translateY(950%);
             border: 10px solid transparent;
             border-top-color: black;
+            border-bottom: none;
             width: 0;
             height: 0;
             position: absolute;
-            top:6px;
-            left: 9px;
+            top:9px;
+            left: 8px;
         }
         &::after{
-            left: 8px;
-            top:6px;
+            left: 7px;
+            top:9px;
             border-top-color: white;
         }
     }
@@ -237,18 +240,19 @@
             content: '';
             display: block;
             margin-left: -10px;
-            transform: rotate(90deg) translateY(100%) translateX(-4%);
+            transform: rotate(90deg) translateY(150%);
             border: 10px solid transparent;
             border-top-color: black;
+            border-bottom: none;
             width: 0;
             height: 0;
             position: absolute;
-            top:6px;
+            top:9px;
             left: 9px;
         }
         &::after{
             left: 10px;
-            top:6px;
+            top:9px;
             border-top-color: white;
         }
     }
