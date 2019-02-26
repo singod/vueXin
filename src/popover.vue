@@ -30,23 +30,29 @@
             },
         methods: {
             contentPosition(){
-                const {contentWrapper}=this.$refs
+                const {contentWrapper,trigger}=this.$refs
                 document.body.appendChild(contentWrapper)
-                let {top,left,height,width} = this.$refs.trigger.getBoundingClientRect()
-                if(this.position==='top'){
-                    contentWrapper.style.left = left + window.screenX + 'px'
-                    contentWrapper.style.top = top + window.scrollY + 'px'
-                }else if(this.position==='bottom'){
-                    contentWrapper.style.left = left + window.screenX + 'px'
-                    contentWrapper.style.top = top + height + window.scrollY + 'px'
-                }else if(this.position==='left'){
-                    contentWrapper.style.left = left  + window.screenX + 'px'
-                    contentWrapper.style.top = top  + window.scrollY + 'px'
+                let {top,left,height,width} = trigger.getBoundingClientRect()
+                let x = {
+                    top:{
+                        top:top + window.scrollY,
+                        left:left + window.screenX
+                    },
+                    bottom:{
+                        top:top + height + window.scrollY,
+                        left:left + window.screenX
+                    },
+                    left:{
+                        top:top  + window.scrollY,
+                        left:left  + window.screenX
+                    },
+                    right:{
+                        top:top  + window.scrollY ,
+                        left:left +width  + window.screenX
+                    }
                 }
-                else if(this.position==='right'){
-                    contentWrapper.style.left = left +width  + window.screenX + 'px'
-                    contentWrapper.style.top = top  + window.scrollY + 'px'
-                }
+                contentWrapper.style.left = x[this.position].left + 'px'
+                contentWrapper.style.top = x[this.position].top + 'px'
             },
             listenToDocument(){
                 document.addEventListener('click',this.eventHandler)
