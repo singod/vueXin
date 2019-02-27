@@ -14,6 +14,8 @@ import plugin from './plugin.js'
 import xTabs from './tabs'
 import xTabsItem from './tabs-item'
 import popover from './popover'
+import collapse from './collapse'
+import collapseItem from './collapse-item'
 
 Vue.component('g-button', Button)
 Vue.component('g-icon', Icon)
@@ -29,6 +31,8 @@ Vue.component('g-content', Content)
 Vue.component('g-tabs', xTabs)
 Vue.component('g-tabs-item', xTabsItem)
 Vue.component('g-popover', popover)
+Vue.component('g-collapse', collapse)
+Vue.component('g-collapse-item', collapseItem)
 Vue.use(plugin)
 
 
@@ -39,7 +43,8 @@ new Vue({
         loading2: false,
         loading3: false,
         value: 'v-model',
-        selectedTab: '1'
+        selectedTab: '1',
+        selectedTT:['1']
     },
     methods: {
         yyy(val){
