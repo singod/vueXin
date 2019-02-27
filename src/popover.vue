@@ -20,6 +20,7 @@
             return {
                 visible: false,
                 animate:false,
+                outClickisOn:false
             }
         },
         mounted(){
@@ -35,10 +36,9 @@
             }
 
         },
-        destroyed(){
+        beforeDestroy(){
             if(this.trigger==='click'){
                 this.$refs.popover.removeEventListener('click',this.onClick)
-
             }else if(this.trigger==='hover'){
                 this.$refs.popover.removeEventListener('mouseenter',this.open)
                 this.$refs.popover.removeEventListener('mouseleave',this.close)
@@ -130,22 +130,59 @@
             },
 
             eventHandler(e){
+                if(this.outClickisOn)return
+                if(this.isPopover(e) || this.isconWrapepr(e))return
                 if(!this.isconWrapepr(e) && this.$refs.popover &&!(this.$refs.popover===e.target || this.$refs.popover.contains(e.target))) {
+                   this.close()
+                }
+            },
+            toOpen(e){
+                if(this.isPopover(e)) {
+                    let vm = document.querySelector('.content-wrapper')
+                    let opacity = getComputedStyle(vm).opacity
+                    this.open(opacity)
+                }
+            },
+            toClose(e){
+                if(this.isPopover(e)) {
+                    this.close()
+                }
+                if(!this.isPopover(e) && !this.isconWrapepr(e)){
+                    document.removeEventListener('click', this.toClose)
+                    clearTimeout(this.timer)
+                }
+            },
+            closeAndHoverIn(e){
+                if(this.$refs.contentWrapper ===e.target){
+                    this.open()
+                }
+            },
+            openAndHoverOut(e){
+                if(this.$refs.contentWrapper ===e.target){
                     this.close()
                 }
             },
+            clearTimer(){
+                clearInterval(this.interval)
+                clearTimeout(this.timer)
+            },
             open(op){
-                    clearInterval(this.interval)
-                    clearTimeout(this.timer)
+                if(this.trigger==='hover'){
+                    this.$refs.contentWrapper.removeEventListener('mouseenter',this.closeAndHoverIn)
+                    this.$refs.contentWrapper.addEventListener('mouseleave',this.openAndHoverOut)
+                }
+                    this.outClickisOn = false
+                    this.clearTimer()
                   setTimeout(()=>{
-                    document.removeEventListener('click', this.xxx1)
-                    document.addEventListener('click', this.xxx2)
+                    document.removeEventListener('click', this.toOpen)
+                    document.addEventListener('click', this.toClose)
                 })
                     this.visible = true
-                this.$refs.contentWrapper.style.opacity = 0
-                this.contentPosition() //搞定内容弹出的位置
-                this.listenToDocument()//添加document的事件监听，在外部点击可以关闭气泡
+                  this.$refs.contentWrapper.style.opacity = 0
+                  this.contentPosition() //搞定内容弹出的位置
+                  this.listenToDocument()//添加document的事件监听，在外部点击可以关闭气泡
                    this.$nextTick(()=>{
+
                        var currentTime
                        var contentOpacity
                        if(op &&typeof op ==='string'){
@@ -156,6 +193,8 @@
                             currentTime = 300
                            contentOpacity = 0
                        }
+
+
                        this.animate= true
                        this.interval = setInterval(()=>{
                            this.$refs.contentWrapper.style.opacity = contentOpacity
@@ -164,47 +203,45 @@
                        this.timer = setTimeout(()=>{
                            clearInterval(this.interval)
                            this.animate= false
-                           document.removeEventListener('click', this.xxx2)
+                           document.removeEventListener('click', this.toClose)
                        },currentTime)
                    })
             },
-            xxx1(e){
-                if(this.isPopover(e)) {
-                    let vm = document.querySelector('.content-wrapper')
-                    let opacity = getComputedStyle(vm).opacity
-                    this.open(opacity)
-                }
-            },
-            xxx2(e){
-                if(this.isPopover(e)) {
-                    this.close()
-                }
-            },
             close(){
+                if(this.trigger==='hover'){
+                    this.$refs.contentWrapper.removeEventListener('mouseleave',this.openAndHoverOut)
+                    this.$refs.contentWrapper.addEventListener('mouseenter',this.closeAndHoverIn)
+                }
+                this.outClickisOn  = true
                setTimeout(()=>{
-                    document.removeEventListener('click', this.xxx2)
-                    document.addEventListener('click', this.xxx1)
+                    document.removeEventListener('click', this.toClose)
+                    document.addEventListener('click', this.toOpen)
                 })
-                clearInterval(this.interval)
-                clearTimeout(this.timer)
+                this.clearTimer()
+
                 let vm = document.querySelector('.content-wrapper')
                 let opacity = getComputedStyle(vm).opacity
                 this.$refs.contentWrapper.style.opacity = opacity
                 let currentTime = (opacity/1)*300
+
+
                 this.animate= true
                 this.interval = setInterval(()=>{
-                    this.$refs.contentWrapper.style.opacity -= 0.1
+                      this.$refs.contentWrapper.style.opacity -= 0.1
                 },30)
                 this.timer = setTimeout(()=>{
                     clearInterval(this.interval)
                     this.visible = false
                     this.animate= false
-                    document.removeEventListener('click', this.xxx1)
+                    this.outClickisOn = false
+                    if(this.trigger==='hover'){
+                        this.$refs.contentWrapper.removeEventListener('mouseenter',this.closeAndHoverIn)
+                    }
+                    document.removeEventListener('click', this.toOpen)
                     document.removeEventListener('click', this.eventHandler)
                 },currentTime)
             },
             onClick () {
-                clearInterval(this.timer)
                 if (this.$refs.trigger.contains(event.target)) {
                     if(!this.animate){
                         if (!this.visible) {
