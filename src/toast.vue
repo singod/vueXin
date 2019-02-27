@@ -88,15 +88,13 @@
                 return `type-${this.type}`
             },
             typeStyle(){
-              if(!this.type)return
-              if(this.type ==='success'){
-                  return 'fill:#67c23a;'
-              }else if(this.type ==='warn'){
-                  return 'fill:#e6a23c;'
-              }
-              else if(this.type ==='error'){
-                  return 'fill:#f56c6c;'
-              }
+                if(!this.type)return
+                let typeColor = {
+                    success:'fill:#67c23a;',
+                    warn:'fill:#e6a23c;',
+                    error:'fill:#f56c6c;'
+                }
+                return typeColor[this.type]
             },
             toastClass(){
                 return `position-${this.position}`
@@ -104,41 +102,42 @@
         },
             methods: {
                 updateStyles(){
+                    let coefficient = 0.8
+                    let height = this.$refs.toast.getBoundingClientRect().height
                     this.$nextTick(()=>{
-                        this.$refs.divided.style.height =  `${this.$refs.toast.getBoundingClientRect().height*0.8}px`
+                        this.$refs.divided.style.height =  `${height*coefficient}px`
                     })
                },
                     exeAutoClosed(){
 
                      if (this.autoClosed) {
-                            setTimeout(() => {
-                            this.leaveActive()
                             setTimeout(()=>{
                                  this.close()
-                            },600)
-
                        }, this.autoClosed * 1000)
                    }
                },
 
                 leaveActive(){
-                        if(this.position ==='top'){
-                            let {top,height}  =this.$el.getBoundingClientRect()
-                            this.$el.style.top = `${top-height}px`
-                        }else if(this.position ==='bottom'){
-                            let {bottom,height}  =this.$el.getBoundingClientRect()
-                            this.$el.style.top = `${bottom+height}px`
-                        }else if(this.position ==='center'){
-                            this.$el.style.opacity = 0
+                    let {bottom,height,top}  =this.$el.getBoundingClientRect()
+                    let $el = this.$el.style
+                    let position =this.position
+                        if(position ==='top'){
+                            $el.top = `${top-height}px`
+                        }else if(position ==='bottom'){
+                            $el.top = `${bottom+height}px`
+                        }else if(position ==='center'){
+                            $el.opacity = 0
                         }
                 },
                 close() {
-                    this.$el.remove()
-                    this.$emit('close')
-                    this.$destroy()
+                      this.leaveActive()
+                      setTimeout(()=>{
+                          this.$el.remove()
+                          this.$emit('close')
+                          this.$destroy()
+                      },600)
                 },
                 onClickClosed(){
-                    console.log(this.closeButton)
                     this.close()
                     if(this.closeButton && typeof this.closeButton.callback === 'function'){
                         this.closeButton.callback()

@@ -13,6 +13,7 @@ import Content from './content'
 import plugin from './plugin.js'
 import xTabs from './tabs'
 import xTabsItem from './tabs-item'
+import popover from './popover'
 
 Vue.component('g-button', Button)
 Vue.component('g-icon', Icon)
@@ -27,6 +28,7 @@ Vue.component('g-slider', Slider)
 Vue.component('g-content', Content)
 Vue.component('g-tabs', xTabs)
 Vue.component('g-tabs-item', xTabsItem)
+Vue.component('g-popover', popover)
 Vue.use(plugin)
 
 
