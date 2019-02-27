@@ -4,7 +4,7 @@
                      :class="{[`position-${position}`]:true}"
                      v-show="visible">
                     <div class="contentSlot">
-                        <slot name="content"></slot>
+                        <slot name="content" :close="close"></slot>
                     </div>
                 </div>
         <span ref="trigger" style="display: inline-block">
@@ -257,117 +257,97 @@
 </script>
 
 <style scoped lang="scss">
-    $border-color:#333;
-    $border-radius:4px;
-    $bg-color:white;
-
-
-.popover{
-    display: inline-block;
-    vertical-align: top;
-    position: relative;
-
-
-}
-.content-wrapper{
-    position: absolute;
-    border: 1px solid $border-color;
-    filter: drop-shadow(0 1px 2px $border-color);
-    background-color: $bg-color;
-    .contentSlot{
-        padding: 1em;
+    $border-color: #333;
+    $border-radius: 4px;
+    .popover {
+        display: inline-block;
+        vertical-align: top;
+        position: relative;
+    }
+    .content-wrapper {
+        position: absolute;
+        border: 1px solid $border-color;
+        border-radius: $border-radius;
+        filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5));
+        background: white;
+        padding: .5em 1em;
         max-width: 20em;
-        max-height: 15em;
-        overflow: scroll;
-        overflow-x:auto;
-        overflow-y: auto;
-    }
-    &.position-top{
-        margin-top: -10px;
-        transform: translateY(-100%);
-        &::before,&::after{
+        word-break: break-all;
+        &::before, &::after {
             content: '';
             display: block;
             border: 10px solid transparent;
-            border-top-color: black;
-            border-bottom: none;
             width: 0;
             height: 0;
             position: absolute;
-            top:100%;
-            left: 10px;
         }
-        &::after{
-            top:calc(100% - 1px);
-            border-top-color: white;
+        &.position-top {
+            transform: translateY(-100%);
+            margin-top: -10px;
+            &::before, &::after {
+                left: 10px;
+            }
+            &::before {
+                border-top-color: black;
+                border-bottom: none;
+                top: 100%;
+            }
+            &::after {
+                border-top-color: white;
+                border-bottom: none;
+                top: calc(100% - 1px);
+            }
         }
-
-    }
-    &.position-bottom{
-        margin-top: 10px;
-        &::before,&::after{
-            transform: rotate(-180deg) translateY(100%);
-            content: '';
-            display: block;
-            border: 10px solid transparent;
-            border-top-color: black;
-            border-bottom: none;
-            width: 0;
-            height: 0;
-            position: absolute;
-            top:0;
-            left: 10px;
+        &.position-bottom {
+            margin-top: 10px;
+            &::before, &::after {
+                left: 10px;
+            }
+            &::before {
+                border-top: none;
+                border-bottom-color: black;
+                bottom: 100%;
+            }
+            &::after {
+                border-top: none;
+                border-bottom-color: white;
+                bottom: calc(100% - 1px);
+            }
         }
-        &::after{
-            top:1px;
-            border-top-color: white;
-        }
-    }
-    &.position-left{
-            margin-left: -10px;
+        &.position-left {
             transform: translateX(-100%);
-        &::before,&::after{
-            content: '';
-            display: block;
-            transform: rotate(-90deg) translateY(950%);
-            border: 10px solid transparent;
-            border-top-color: black;
-            border-bottom: none;
-            width: 0;
-            height: 0;
-            position: absolute;
-            top:9px;
-            left: 8px;
-        }
-        &::after{
-            left: 7px;
-            top:9px;
-            border-top-color: white;
-        }
-    }
-    &.position-right{
-        margin-left: 11px;
-        &::before,&::after{
-            content: '';
-            display: block;
             margin-left: -10px;
-            transform: rotate(90deg) translateY(150%);
-            border: 10px solid transparent;
-            border-top-color: black;
-            border-bottom: none;
-            width: 0;
-            height: 0;
-            position: absolute;
-            top:9px;
-            left: 9px;
+            &::before, &::after {
+                transform: translateY(-50%);
+                top: 50%;
+            }
+            &::before {
+                border-left-color: black;
+                border-right: none;
+                left: 100%;
+            }
+            &::after {
+                border-left-color: white;
+                border-right: none;
+                left: calc(100% - 1px);
+            }
         }
-        &::after{
-            left: 10px;
-            top:9px;
-            border-top-color: white;
+        &.position-right {
+            margin-left: 10px;
+            &::before, &::after {
+                transform: translateY(-50%);
+                top: 50%;
+            }
+            &::before {
+                border-right-color: black;
+                border-left: none;
+                right: 100%;
+            }
+            &::after {
+                border-right-color: white;
+                border-left: none;
+                right: calc(100% - 1px);
+            }
         }
     }
-
-
-}
 </style>
