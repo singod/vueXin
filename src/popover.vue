@@ -1,14 +1,12 @@
 <template>
     <div class="popover" ref="popover">
-        <transition name="fade">
-            <div ref="contentWrapper" class="content-wrapper"
-                 :class="{[`position-${position}`]:true}"
-                 v-if="visible">
-                <div class="contentSlot">
-                    <slot name="content"></slot>
+                <div ref="contentWrapper" class="content-wrapper"
+                     :class="{[`position-${position}`]:true}"
+                     v-show="visible">
+                    <div class="contentSlot">
+                        <slot name="content"></slot>
+                    </div>
                 </div>
-            </div>
-        </transition>
         <span ref="trigger" style="display: inline-block">
             <slot></slot>
         </span>
@@ -19,7 +17,10 @@
     export default {
         name: "g-popover",
         data () {
-            return {visible: false}
+            return {
+                visible: false,
+                animate:false,
+            }
         },
         mounted(){
             if(this.trigger==='click'){
@@ -84,7 +85,7 @@
         },
         methods: {
             contentPosition(){
-                const {contentWrapper,trigger}=this.$refs
+                const {contentWrapper,trigger} = this.$refs
                 document.body.appendChild(contentWrapper)
                 let {top,left,height,width} = trigger.getBoundingClientRect()
                 let x = {
@@ -108,6 +109,7 @@
                 contentWrapper.style.left = x[this.position].left + 'px'
                 contentWrapper.style.top = x[this.position].top + 'px'
             },
+
             listenToDocument(){
                 document.addEventListener('click',this.eventHandler)
             },
@@ -119,29 +121,86 @@
                     }
                 })
             },
+
             eventHandler(e){
                 if(!this.isconWrapepr(e) && this.$refs.popover &&!(this.$refs.popover===e.target || this.$refs.popover.contains(e.target))) {
                     this.close()
                 }
             },
-            open(){
-                this.visible = true
-                this.$nextTick(() => {
-                    this.contentPosition() //搞定内容弹出的位置
-                    this.listenToDocument()//添加document的事件监听，在外部点击可以关闭气泡
+            open(op){
+                    clearInterval(this.interval)
+                    clearTimeout(this.timer)
+                  setTimeout(()=>{
+                    document.removeEventListener('click', this.xxx1)
+                    document.addEventListener('click', this.xxx2)
                 })
+                    this.visible = true
+                this.$refs.contentWrapper.style.opacity = 0
+                this.contentPosition() //搞定内容弹出的位置
+                this.listenToDocument()//添加document的事件监听，在外部点击可以关闭气泡
+                   this.$nextTick(()=>{
+                       var currentTime
+                       var contentOpacity
+                       if(op &&typeof op ==='string'){
+                            this.$refs.contentWrapper.style.opacity = op
+                           contentOpacity= op
+                            currentTime = (op/1)*300
+                       }else{
+                            currentTime = 300
+                           contentOpacity = 0
+                       }
+                       this.animate= true
+                       this.interval = setInterval(()=>{
+                           this.$refs.contentWrapper.style.opacity = contentOpacity
+                           contentOpacity += 0.1
+                       },30)
+                       this.timer = setTimeout(()=>{
+                           clearInterval(this.interval)
+                           this.animate= false
+                           document.removeEventListener('click', this.xxx2)
+                       },currentTime)
+                   })
+            },
+            xxx1(){
+                let vm = document.querySelector('.content-wrapper')
+                let opacity = getComputedStyle(vm).opacity
+                this.open(opacity)
+            },
+            xxx2(){
+                this.close()
             },
             close(){
-                this.visible = false
-                document.removeEventListener('click', this.eventHandler)
+               setTimeout(()=>{
+                    document.removeEventListener('click', this.xxx2)
+                    document.addEventListener('click', this.xxx1)
+                })
+                clearInterval(this.interval)
+                clearTimeout(this.timer)
+                let vm = document.querySelector('.content-wrapper')
+                let opacity = getComputedStyle(vm).opacity
+                this.$refs.contentWrapper.style.opacity = opacity
+                let currentTime = (opacity/1)*300
+                this.animate= true
+                this.interval = setInterval(()=>{
+                    this.$refs.contentWrapper.style.opacity -= 0.1
+                },30)
+                this.timer = setTimeout(()=>{
+                    clearInterval(this.interval)
+                    this.visible = false
+                    this.animate= false
+                    document.removeEventListener('click', this.xxx1)
+                    document.removeEventListener('click', this.eventHandler)
+                },currentTime)
             },
             onClick () {
+                clearInterval(this.timer)
                 if (this.$refs.trigger.contains(event.target)) {
-                    this.visible = !this.visible
-                    if (this.visible) {
-                        this.open()
-                    }else{
-                        this.close()
+                    if(!this.animate){
+                        if (!this.visible) {
+                            this.open()
+                        }else{
+                            this.close()
+                        }
                     }
                 }
             }
@@ -153,10 +212,13 @@
     $border-color:#333;
     $border-radius:4px;
     $bg-color:white;
+
+
 .popover{
     display: inline-block;
     vertical-align: top;
     position: relative;
+
 
 }
 .content-wrapper{
@@ -191,6 +253,7 @@
             top:calc(100% - 1px);
             border-top-color: white;
         }
+
     }
     &.position-bottom{
         margin-top: 10px;
