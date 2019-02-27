@@ -90,12 +90,11 @@
 
         <g-popover position="left">
             <template slot="content" slot-scope="close">
+                <div>支持内部关闭</div>
                 <g-button @click="close.close">
                     关闭
                 </g-button>
-                <g-button @click="close.close">
-                    关闭
-                </g-button>
+
             </template>
             <g-button>关闭</g-button>
         </g-popover>
