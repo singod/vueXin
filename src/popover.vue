@@ -121,6 +121,13 @@
                     }
                 })
             },
+            isPopover(e){    //判断点击的地方是否在contentWrapper里面
+                return   e.path.some(child=>{
+                    if(child===this.$refs.popover){
+                        return true
+                    }
+                })
+            },
 
             eventHandler(e){
                 if(!this.isconWrapepr(e) && this.$refs.popover &&!(this.$refs.popover===e.target || this.$refs.popover.contains(e.target))) {
@@ -161,13 +168,17 @@
                        },currentTime)
                    })
             },
-            xxx1(){
-                let vm = document.querySelector('.content-wrapper')
-                let opacity = getComputedStyle(vm).opacity
-                this.open(opacity)
+            xxx1(e){
+                if(this.isPopover(e)) {
+                    let vm = document.querySelector('.content-wrapper')
+                    let opacity = getComputedStyle(vm).opacity
+                    this.open(opacity)
+                }
             },
-            xxx2(){
-                this.close()
+            xxx2(e){
+                if(this.isPopover(e)) {
+                    this.close()
+                }
             },
             close(){
                setTimeout(()=>{
