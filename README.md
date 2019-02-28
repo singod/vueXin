@@ -1,37 +1,20 @@
-# easy to use  - 一个 Vue UI 组件
+# Xin - 一个 Vue UI 组件
 
 [![Build Status](https://www.travis-ci.org/jumodada/My-Vue-Wheel.svg?branch=master)](https://www.travis-ci.org/jumodada/My-Vue-Wheel)
 
 ## 介绍
-1.添加样式，使用本框架前，请在 CSS 中开启 border-box
+1.个人的学习vue的项目。样式和功能参照AntDesgin和elementUI,预计五月份会完成15个组件并发布1.0版本。代码每周都会重构并添加新的东西，单元测试也是
 
-     ```
-     *,*::before,*::after{box-sizing: border-box;}
-     ```
-     IE8以上浏览器支持此样式
-
-   2.安装etu
+   2.安装mvw
    ```
-   npm i --save etu
+      loading。。。。。
    ```     
 
-   3.引入etu
+   3.引入mvw
    ```
-   import {Button,Icon,ButtonGroup} from 'my-wheel-test-01'
-     import 'my-wheel-test-01/dist/index.css'
-   export default {
-     name: 'App',
-     components:{
-       'g-button':Button,
-       'g-icon':Icon,
-       'g-ButtonGroup':ButtonGroup
-     }
-   }
+  
    ```
-   4.引入svg symbols
-   ```
-   <script src="//at.alicdn.com/t/font_1029022_3umhd98poyq.js"></script>
-   ```
+   
 
 ## 开始使用
   1.安装
@@ -47,9 +30,3 @@
 ## 如何共享代码
 
 
-
-使用本框架前，请在 CSS 中开启 border-box
-
-```
-*{box-sizing: border-box;}
-```
