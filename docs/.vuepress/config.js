@@ -1,4 +1,5 @@
 module.exports = {
+    base:'/My-Vue-Wheel/',
     title: 'Xin',
     description: '灵活易用的组件库',
     themeConfig: {
@@ -7,7 +8,11 @@ module.exports = {
             '/install/',
             {
                 title:'组件',
-                children:[ '/components/button/']
+                children:[ '/components/button/',
+                    '/components/icon/',
+                    '/components/input/'
+
+                ]
 
             },
 

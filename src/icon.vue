@@ -1,6 +1,5 @@
 <template>
-    <svg class="icon" :style="`fill:${color}`">
-
+    <svg class="x-icon" :style="`fill:${color}`">
         <use :xlink:href="`#icon-${name}`"></use>
     </svg>
 </template>
@@ -14,7 +13,7 @@
 </script>
 
 <style scoped lang="scss">
-    .icon {
+    .x-icon {
         width: 1em;
         height: 1em;
     }
