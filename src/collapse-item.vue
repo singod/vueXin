@@ -2,7 +2,7 @@
 
 <div class="collapse-item">
 <div class="collapse-item-title" @click="spread">
-    <g-icon name="arrow" class="arrow" ref="arrow" :class="{rotate:open}"></g-icon>
+    <x-icon name="arrow" class="arrow" ref="arrow" :class="{rotate:open}"></x-icon>
 {{title}}
 </div>
         <transition name="slide">
@@ -18,7 +18,7 @@
 <script>
     import Icon from './icon'
     export default {
-        name: "g-collapse-item",
+        name: "x-collapse-item",
         data(){
           return {
               open:false,
@@ -28,7 +28,7 @@
           }
         },
         components:{
-            'g-icon':Icon
+            'x-icon':Icon
         },
         inject:['eventBus'],
         props:{

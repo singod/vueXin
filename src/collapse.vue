@@ -7,7 +7,7 @@
 <script>
     import Vue from 'vue'
     export default {
-        name: "g-collapse",
+        name: "x-collapse",
         data(){
             return {
                 eventBus:new Vue(),

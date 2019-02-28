@@ -23,7 +23,7 @@
 <script>
 
     export default {
-        name: "g-tabs",
+        name: "x-tabs",
         props:{
             selected:{
                 type:String,

@@ -1,9 +1,9 @@
 <template>
 <div class="toast" ref="toast" :class="[toastClass,typeSelect]">
     <div class="toast-icon" v-if="type">
-        <g-icon :name="type" style="width: 2em;height: 2em">
+        <x-icon :name="type" style="width: 2em;height: 2em">
 
-        </g-icon>
+        </x-icon>
     </div>
     <div class="message">
         <slot v-if="!enableHTML"></slot>
@@ -14,13 +14,13 @@
         <div v-if="closeButton.text &&!closeButton.closeIcon">
             {{closeButton.text}}
         </div>
-         <g-icon  class="close-icon" v-if="closeButton.closeIcon"
+         <x-icon  class="close-icon" v-if="closeButton.closeIcon"
                   :name="closeButton.closeIcon"
                   style="width: 1em;height: 1em;"
                   :style="typeStyle"
          >
 
-        </g-icon>
+        </x-icon>
     </span>
 </div>
 </template>
@@ -30,7 +30,7 @@
     export default {
         name: "toast",
         components:{
-            'g-icon':Icon
+            'x-icon':Icon
         },
         props: {
             type:{

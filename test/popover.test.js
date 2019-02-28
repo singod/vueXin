@@ -10,25 +10,25 @@ describe('Popover', () => {
         expect(Popover).to.be.ok
     })
     it('可以设置position', (done) => {
-        Vue.component('g-popover',Popover)
+        Vue.component('x-popover',Popover)
         const div = document.createElement('div')
         document.body.appendChild(div)
         div.innerHTML = `
-        <g-popover position="left" ref="a">
+        <x-popover position="left" ref="a">
             <template slot="content" slot-scope="close">
                 <div>支持内部关闭</div>
-                <g-button @click="close.close">
+                <x-button @click="close.close">
                     关闭
-                </g-button>
+                </x-button>
             </template>
             <button>关闭</button>
-        </g-popover>`
+        </x-popover>`
         const vm = new Vue({
             el:div
         })
         console.log(vm.$el)
         vm.$nextTick(()=>{
-            vm.$el.querySelector('g-button').click()
+            vm.$el.querySelector('x-button').click()
 
             setTimeout(()=>{
                 expect(vm.$refs.a.$refs.contentWrapper.classList.contains('position-left')).to.eq(true)
@@ -37,19 +37,19 @@ describe('Popover', () => {
         })
     })
     xit('可以设置trigger', (done) => {
-        Vue.component('g-popover',Popover)
+        Vue.component('x-popover',Popover)
         const div = document.createElement('div')
         document.body.appendChild(div)
         div.innerHTML = `
-        <g-popover position="left" ref="a" trigger="hover">
+        <x-popover position="left" ref="a" trigger="hover">
             <template slot="content">
                 <div>支持内部关闭</div>
-                <g-button @click="close.close">
+                <x-button @click="close.close">
                     关闭
-                </g-button>
+                </x-button>
             </template>
             <button>关闭</button>
-        </g-popover>`
+        </x-popover>`
         const vm = new Vue({
             el:div
         })
