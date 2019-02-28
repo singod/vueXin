@@ -5,7 +5,11 @@ module.exports = {
       //  sidebar:'auto',
         sidebar: [
             '/install/',
-            '/get Start/',
+            {
+                title:'组件',
+                children:[ '/components/button/']
+
+            },
 
         ]
     }
