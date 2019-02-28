@@ -4,14 +4,13 @@ title: 安装
 
 # 安装
 
-本章节待完善
 
-```bash
-npm install gulu
+```
+npm install  //还没做完，现不能用于生产环境，仅供学习参考交流。
 ```
 
-或
+可以前往
+https://github.com/jumodada/My-Vue-Wheel  **git clone 一下**
 
-```bash
-yarn add gulu
-```
+
+
