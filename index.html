@@ -70,7 +70,7 @@
 <div id="app">
 
 
-    <div style="overflow: hidden;margin: 300px">
+    <div style="overflow: hidden;margin: 300px;">
             <g-collapse single :selected.sync="selectedTT">
                 <g-collapse-item title="英雄" name="1">火猫</g-collapse-item>
                 <g-collapse-item title="定位" name="2">核心，断兵</g-collapse-item>
@@ -102,9 +102,14 @@
             <g-collapse-item title="图片" name="2">
                 <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" alt="">
             </g-collapse-item>
-            <g-collapse-item title="链接" name="3"><div>
-                链接
-                <a href="https://segmentfault.com/a/1190000018202016">点击跳转</a>
+            <g-collapse-item title="嵌套" name="3"><div>
+                <g-collapse single :selected.sync="selectedTT">
+                    <g-collapse-item title="英雄" name="1">火猫</g-collapse-item>
+                    <g-collapse-item title="定位" name="2">核心，断兵</g-collapse-item>
+                    <g-collapse-item title="出装" name="3">暗灭，电锤</g-collapse-item>
+                    <g-collapse-item title="玩法" name="4">打钱，打架，拿人头</g-collapse-item>
+                    <g-collapse-item title="皮肤" name="5">不买玩你麻痹</g-collapse-item>
+                </g-collapse>
             </div></g-collapse-item>
 
         </g-collapse>

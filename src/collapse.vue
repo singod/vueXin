@@ -38,7 +38,6 @@
                 }else{
                     selectedCopy.push(name)
                 }
-
                 this.$emit('update:selected',selectedCopy)
                 this.eventBus.$emit('update:selected',selectedCopy)
             })

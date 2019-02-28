@@ -2,6 +2,7 @@
 
 <div class="collapse-item">
 <div class="collapse-item-title" @click="spread">
+    <g-icon name="arrow" class="arrow" ref="arrow" :class="{rotate:open}"></g-icon>
 {{title}}
 </div>
         <transition name="slide">
@@ -15,12 +16,19 @@
 </template>
 
 <script>
+    import Icon from './icon'
     export default {
         name: "g-collapse-item",
         data(){
           return {
-              open:false
+              open:false,
+              rotate:45,
+              interval:null,
+              timer:null
           }
+        },
+        components:{
+            'g-icon':Icon
         },
         inject:['eventBus'],
         props:{
@@ -63,7 +71,6 @@
     .slide-leave-active{
         transition: all .1s ease-in-out;
     }
-
     .slide-enter-to,.slide-leave{
         height: 100%;
         padding:10px;
@@ -80,6 +87,7 @@
     }
 
     .collapse-item{
+
         >.collapse-item-title{
             border: 1px solid $grey;
             margin-top: -1px;
@@ -91,7 +99,16 @@
             align-items: center;
             padding:0 8px;
             background-color: #eeeeee;
-
+            .arrow{
+                margin-right: 10px;
+                transform: rotate(0deg);
+                transition: all .3s;
+            }
+            .rotate{
+                margin-right: 10px;
+                transform: rotate(90deg);
+                transition: all .3s;
+            }
         }
         &:first-child{
             >.collapse-item-title{
