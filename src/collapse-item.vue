@@ -4,10 +4,12 @@
 <div class="collapse-item-title" @click="spread">
 {{title}}
 </div>
-        <div class="collapse-item-content" v-show="open">
-            <slot>
-            </slot>
-        </div>
+        <transition name="slide">
+            <div class="collapse-item-content" v-show="open">
+                <slot>
+                </slot>
+            </div>
+        </transition>
 </div>
 
 </template>
@@ -54,6 +56,38 @@
 <style scoped lang="scss">
     $grey:#ddd;
     $border-radius:4px;
+    .slide-enter-active {
+        transition: all .15s ease-in-out;
+
+    }
+    .slide-leave-active{
+        transition: all .1s ease-in-out;
+    }
+    .slide-enter {
+        height: 0;
+        padding:0;
+        opacity: 0;
+        font-size: 0;
+        line-height: 0;
+        border:none;
+        margin: 0;
+
+    }
+    .slide-enter-to{
+        height: 100%;
+        padding:10px;
+    }
+    .slide-leave {
+        height: 100%;
+        padding:10px;
+    }
+    .slide-leave-to {
+        height: 0;
+        padding:0;
+        font-size: 0;
+        border:none;
+        margin: 0;
+    }
 
     .collapse-item{
         >.collapse-item-title{
@@ -61,7 +95,8 @@
             margin-top: -1px;
             margin-left: -1px;
             margin-right:-1px;
-            min-height: 42px;
+            min-height: 52px;
+            font-size: 15px;
             display: flex;
             align-items: center;
             padding:0 8px;
@@ -81,7 +116,7 @@
             }
         }
         >.collapse-item-content{
-                padding:8px;
+                padding:10px;
                 border-bottom: 1px solid $grey;
         }
 
