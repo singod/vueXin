@@ -63,30 +63,20 @@
     .slide-leave-active{
         transition: all .1s ease-in-out;
     }
-    .slide-enter {
-        height: 0;
-        padding:0;
-        opacity: 0;
-        font-size: 0;
-        line-height: 0;
-        border:none;
-        margin: 0;
 
-    }
-    .slide-enter-to{
+    .slide-enter-to,.slide-leave{
         height: 100%;
         padding:10px;
     }
-    .slide-leave {
-        height: 100%;
-        padding:10px;
-    }
-    .slide-leave-to {
+    .slide-leave-to,.slide-enter {
         height: 0;
         padding:0;
         font-size: 0;
         border:none;
         margin: 0;
+    }
+    .slide-enter {
+        opacity: 0;
     }
 
     .collapse-item{
